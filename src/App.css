@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+.spinner{
+  width: 30px;
+  height: 30px;
+}
+.spinner_container{
+  margin: 70px auto;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
