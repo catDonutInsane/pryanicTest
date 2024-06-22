@@ -26,6 +26,8 @@ export const Table = () =>{
 
    
     return isLoading
-                ?<Spinner/>
+                ?data
+                ?<FullFeaturedCrudGrid/>
+                :<Spinner/>
                 :<FullFeaturedCrudGrid/>
 }
