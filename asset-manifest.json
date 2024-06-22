@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/pryanictest/static/css/main.22089e7c.css",
+    "main.js": "/pryanictest/static/js/main.4f46b217.js",
+    "static/media/loader.gif": "/pryanictest/static/media/loader.1952935ed80fba5926fe.gif",
+    "index.html": "/pryanictest/index.html",
+    "main.22089e7c.css.map": "/pryanictest/static/css/main.22089e7c.css.map",
+    "main.4f46b217.js.map": "/pryanictest/static/js/main.4f46b217.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.22089e7c.css",
+    "static/js/main.4f46b217.js"
+  ]
+}
