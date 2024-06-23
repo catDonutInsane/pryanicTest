@@ -7,31 +7,34 @@ import { userAPI } from "../../api/api";
 import { SetIsLoading, setData } from "../../store/slices/reducer";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 
 export const LoginForm = () => {
 
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
+  const [err, setErr] = useState<AxiosError<unknown, any>>()
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {isLoading} = useAppSelector(state => state.red)
 
   const LoginHandler = () => {  
+    
     dispatch(SetIsLoading(true));  
+
     userAPI.login(login, pass)
       .then((res) => {
         console.log(res)
-        if (res.data.error_code !== 0) {
-          
+        
+        if (res.data.error_code !== 0) { 
+          dispatch(SetIsLoading(false));
           let alertMessage = document.getElementById("wrong");
           if (alertMessage) {
             alertMessage.style.display = "block";
-            dispatch(SetIsLoading(false));
+            
           }
         } else {
           sessionStorage.setItem("token", res.data.data.token);
-
-      
           userAPI.loadData()
             .then((res) => {
               dispatch(setData(res));              
@@ -41,7 +44,14 @@ export const LoginForm = () => {
           
         }
       })
-      .catch((error) => console.error(error));
+      .catch((error:AxiosError) =>{
+        console.log(error)
+        dispatch(SetIsLoading(false))
+        setErr(error)
+          
+          
+      
+      })
   };
 
   const loginHandler: React.ComponentProps<"input">["onChange"] = (e) => {
@@ -88,7 +98,8 @@ export const LoginForm = () => {
                 <Button onClick={LoginHandler} variant="contained">
                   Войти
                 </Button>
-                <AlertMsg isLoading={isLoading}/>
+                <AlertMsg isLoading={isLoading} err={err}
+                />
               </Box>
   
 };
