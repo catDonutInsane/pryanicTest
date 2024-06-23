@@ -40,7 +40,7 @@ interface EditToolbarProps {
 }
 
 function EditToolbar(props: EditToolbarProps) {
-  const {  setRowModesModel,setRows,setCurrentID } = props;
+  const {  setRowModesModel,setRows } = props;
 const dispatch = useAppDispatch()
   const handleClick = () => {
     const id = uuidv4();
@@ -234,7 +234,7 @@ export default function FullFeaturedCrudGrid() {
           toolbar: EditToolbar as GridSlots['toolbar'],
         }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel,setCurrentID },
+          toolbar: { setRows, setRowModesModel },
         }}
       />
     </Box>

@@ -5,13 +5,13 @@ import { SetIsLoading } from "../../store/slices/reducer";
 import { Spinner } from "../spinner/Spinner";
 import FullFeaturedCrudGrid from "./theTableOne/TheTableOne";
 import { userAPI } from "../../api/api";
-import { resolve } from "path/win32";
-export const Table = () =>{
-    const dispatch = useAppDispatch()
-    const { data,isLoading} = useAppSelector(state => state.red)
 
-    useEffect(()=>{
-        
+export const Table = () =>{
+
+    const dispatch = useAppDispatch()
+    const { data} = useAppSelector(state => state.red)
+
+    useEffect(()=>{        
         if(data?.length===0  || data===null){
             dispatch(SetIsLoading(true))
         userAPI.loadData()
@@ -28,8 +28,4 @@ export const Table = () =>{
     return data?.length===0  || data===null
                 ?<Spinner/>
                 :<FullFeaturedCrudGrid/>
-                // :<FullFeaturedCrudGrid/>
-
-
-                
 }

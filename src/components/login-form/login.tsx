@@ -14,6 +14,7 @@ export const LoginForm = () => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
   const [err, setErr] = useState<AxiosError<unknown, any>>()
+  const [visible , setVisible] = useState("none")
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {isLoading} = useAppSelector(state => state.red)
@@ -28,11 +29,7 @@ export const LoginForm = () => {
         
         if (res.data.error_code !== 0) { 
           dispatch(SetIsLoading(false));
-          let alertMessage = document.getElementById("wrong");
-          if (alertMessage) {
-            alertMessage.style.display = "block";
-            
-          }
+         setVisible("block")
         } else {
           sessionStorage.setItem("token", res.data.data.token);
           userAPI.loadData()
@@ -48,9 +45,6 @@ export const LoginForm = () => {
         console.log(error)
         dispatch(SetIsLoading(false))
         setErr(error)
-          
-          
-      
       })
   };
 
@@ -98,7 +92,7 @@ export const LoginForm = () => {
                 <Button onClick={LoginHandler} variant="contained">
                   Войти
                 </Button>
-                <AlertMsg isLoading={isLoading} err={err}
+                <AlertMsg isLoading={isLoading} err={err} visible={visible}
                 />
               </Box>
   

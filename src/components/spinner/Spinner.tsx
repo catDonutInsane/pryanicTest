@@ -3,7 +3,7 @@ export const Spinner = () =>{
     return(
         <div className='spinner_container'>
             <span>LOADING...</span>
-            <img className="spinner" src={img}/>
+            <img className="spinner" src={img} alt='spinner'/>
         </div>
     )
 }
