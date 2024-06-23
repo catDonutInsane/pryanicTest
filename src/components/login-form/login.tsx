@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Spinner } from "../spinner/Spinner";
+import { AlertMsg } from "../alert/AlertMsg";
 import { Button } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { userAPI } from "../../api/api";
@@ -16,7 +16,8 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const {isLoading} = useAppSelector(state => state.red)
 
-  const LoginHandler = () => {    
+  const LoginHandler = () => {  
+    dispatch(SetIsLoading(true));  
     userAPI.login(login, pass)
       .then((res) => {
         console.log(res)
@@ -25,9 +26,9 @@ export const LoginForm = () => {
           let alertMessage = document.getElementById("wrong");
           if (alertMessage) {
             alertMessage.style.display = "block";
+            dispatch(SetIsLoading(false));
           }
         } else {
-          dispatch(SetIsLoading(true));
           sessionStorage.setItem("token", res.data.data.token);
 
       
@@ -49,9 +50,7 @@ export const LoginForm = () => {
   const passHandler: React.ComponentProps<"input">["onChange"] = (e) => {
     setPass(e.currentTarget.value);
   };
-  return  isLoading
-            ?<Spinner/>
-            :<Box
+  return  <Box
                 sx={{
                   display: "flex",
                   flexDirection: "column",
@@ -89,9 +88,7 @@ export const LoginForm = () => {
                 <Button onClick={LoginHandler} variant="contained">
                   Войти
                 </Button>
-                <div id="wrong" style={{ color: "red", display: "none" }}>
-                  Неверный логин или пароль
-                </div>
+                <AlertMsg isLoading={isLoading}/>
               </Box>
   
 };

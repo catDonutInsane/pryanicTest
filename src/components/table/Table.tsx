@@ -25,9 +25,11 @@ export const Table = () =>{
     },[])
 
    
-    return isLoading
-                ?data
-                ?<FullFeaturedCrudGrid/>
-                :<Spinner/>
+    return data?.length===0  || data===null
+                ?<Spinner/>
                 :<FullFeaturedCrudGrid/>
+                // :<FullFeaturedCrudGrid/>
+
+
+                
 }
